@@ -1,6 +1,17 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- CUSTOM keymaps start
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visual mode' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in visual mode' })
+vim.keymap.set('n', 'Q', '@q') -- Q to replay macro
+vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Better scrolling
+vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Better scrolling
+vim.keymap.set('x', '<leader>p', [["_dP]]) -- Don't replace register when pasting
+vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
+vim.keymap.set('n', '<C-s>', '<cmd>:update<CR>') -- Saving buffer changes to file
+-- CUSTOM keymaps end
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
