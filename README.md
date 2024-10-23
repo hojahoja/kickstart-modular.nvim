@@ -12,6 +12,27 @@ A starting point for Neovim that is:
 
 **NOT** a Neovim distribution, but instead a starting point for your configuration.
 
+## Private Fork (mirror)
+
+Instructions based on 
+[this guide](https://gist.github.com/0xjac/85097472043b697ab57ba1b1c7530274).
+```sh
+git remote add upstream git@github.com:dam9000/kickstart-modular.nvim.git
+```
+```sh
+git remote set-url --push upstream DISABLE
+```
+Check your remotes with `git remote -v`
+
+Push to `origin` with `git push origin`.
+When you want to pull changes from `upstream ` you can just fetch the remote and rebase on top of your work.
+```sh
+git fetch upstream
+```
+```sh
+git rebase upstream/master
+```
+
 ## Installation
 
 ### Install Neovim
