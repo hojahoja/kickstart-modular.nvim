@@ -1,23 +1,24 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-
+-- Conditional keymaps depending on whether nvim is running inside vscode.
+if not vim.g.vscode then
+  vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Better scrolling
+  vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Better scrolling
+  vim.keymap.set('n', '<C-s>', '<cmd>:update<CR>') -- Saving buffer changes to file
+  -- Diagnostic keymaps
+  vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+end
 -- CUSTOM keymaps start
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visual mode' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in visual mode' })
 vim.keymap.set('n', 'Q', '@q') -- Q to replay macro
-vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Better scrolling
-vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Better scrolling
 vim.keymap.set('x', '<leader>p', [["_dP]]) -- Don't replace register when pasting
 vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
-vim.keymap.set('n', '<C-s>', '<cmd>:update<CR>') -- Saving buffer changes to file
 -- CUSTOM keymaps end
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
