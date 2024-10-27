@@ -1,5 +1,7 @@
--- [[ Configure and install plugins ]]
--- require('lazy').setup({
---
--- })
--- vim: ts=2 sts=2 sw=2 et
+return {
+  { -- Modularized setup for plugins that are loaded when inside VScode (CUSTOM)
+    require 'kickstart/plugins/mini',
+    require 'custom.plugins.multicursor',
+    -- { import = 'custom.plugins' },
+  },
+}
