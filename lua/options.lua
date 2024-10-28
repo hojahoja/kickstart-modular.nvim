@@ -28,8 +28,10 @@ end
 vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,<>;[]'
 
 -- Windows specific langauge options
-vim.opt.langmenu = 'en_US'
-vim.api.nvim_exec2('lan mes en_US', {})
+if vim.loop.os_uname().sysname:lower():find 'windows' ~= nil then
+  vim.opt.langmenu = 'en_US'
+  vim.api.nvim_exec2('lan mes en_US', {})
+end
 -- CUSTOM options end
 
 -- Enable mouse mode, can be useful for resizing splits for example!
