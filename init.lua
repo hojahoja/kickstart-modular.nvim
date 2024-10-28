@@ -13,6 +13,11 @@ require 'options'
 -- [[ Basic Keymaps ]]
 require 'keymaps'
 
+-- [[ Load neovide's configuration if running inside neovide ]]
+if vim.g.neovide then
+  require 'neovide-options'
+end
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-bootstrap'
 
