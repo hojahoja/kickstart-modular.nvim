@@ -14,13 +14,13 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in vi
 vim.keymap.set('n', 'Q', '@q') -- Q to replay macro
 vim.keymap.set('x', '<leader>p', [["_dP]]) -- Don't replace register when pasting
 vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
-vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h', { desc = 'Change working directory to current file location' }) -- Quick escape from insert mode
+vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = 'Change working directory to current file location' }) -- Quick escape from insert mode
 -- CUSTOM keymaps end
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 -- Regular <Esc> conflicts with multicursor plugin.
-vim.keymap.set('n', '<leader><Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<leader><Esc>', '<cmd>nohlsearch<CR>', { desc = '[Esc] Disable highlights' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
