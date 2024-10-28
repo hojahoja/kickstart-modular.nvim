@@ -18,12 +18,18 @@ if not vim.g.vscode then
   vim.opt.breakindent = true
   -- Minimal number of screen lines to keep above and below the cursor.
   vim.opt.scrolloff = 10
+  -- Show which line your cursor is on
+  vim.opt.cursorline = true
 end
 
 -- CUSTOM options start
 -- Langmap Finnish keyboard layout (No dead keys) to have English
 -- special character layout in normal mode
-vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?'
+vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,<>;[]'
+
+-- Windows specific langauge options
+vim.opt.langmenu = 'en_US'
+vim.api.nvim_exec2('lan mes en_US', {})
 -- CUSTOM options end
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -67,8 +73,5 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
-
--- Show which line your cursor is on
-vim.opt.cursorline = true
 
 -- vim: ts=2 sts=2 sw=2 et
