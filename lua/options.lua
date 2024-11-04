@@ -3,7 +3,7 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- Conditional keymaps depending on whether nvim is running inside vscode.
+-- Conditional options depending on whether nvim is running inside vscode.
 if not vim.g.vscode then
   -- Make line numbers default
   vim.opt.number = true
@@ -27,11 +27,20 @@ end
 -- special character layout in normal mode
 vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,<>;[]'
 
--- Windows specific langauge options
+-- Windows specific options
 if vim.loop.os_uname().sysname:lower():find 'windows' ~= nil then
+  -- Make vim use english
   vim.opt.langmenu = 'en_US'
   vim.api.nvim_exec2('lan mes en_US', {})
+  -- Set default terminal tool to Powershell 7
+  vim.opt.shell = 'pwsh'
 end
+
+-- Default indentation options
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
 -- CUSTOM options end
 
 -- Enable mouse mode, can be useful for resizing splits for example!
