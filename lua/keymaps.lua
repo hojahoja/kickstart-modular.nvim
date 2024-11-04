@@ -1,6 +1,6 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
--- Conditional keymaps depending on whether nvim is running inside vscode.
+-- Conditional keymaps depending on whether nvim is running inside vscode
 if not vim.g.vscode then
   vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Better scrolling
   vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Better scrolling
@@ -9,9 +9,26 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 end
 -- CUSTOM keymaps start
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visual mode' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in visual mode' })
+-- Run the selected command with langremap enabled
+local function langremap_toggled_cmd(command)
+  vim.opt.langremap = true
+  vim.cmd('normal!' .. command)
+  vim.opt.langremap = false
+end
+
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visual mode', silent = true })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in visual mode', silent = true })
 vim.keymap.set('n', 'Q', '@q') -- Q to replay macro
+
+-- Langremap macro fixes
+vim.keymap.set('n', '<leader>@', function()
+  langremap_toggled_cmd '@@'
+end, { noremap = true, silent = true, desc = 'Run previous macro with langremap toggled' })
+
+vim.keymap.set('v', '<leader>@', function()
+  langremap_toggled_cmd 'gv@@'
+end, { noremap = true, silent = true, desc = 'Run previous macro with langremap toggled' })
+
 vim.keymap.set('x', '<leader>p', [["_dP]]) -- Don't replace register when pasting
 vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
 vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = 'Change working directory to current file location' }) -- Quick escape from insert mode
@@ -19,8 +36,7 @@ vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = 'Change working
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
--- Regular <Esc> conflicts with multicursor plugin.
-vim.keymap.set('n', '<leader><Esc>', '<cmd>nohlsearch<CR>', { desc = '[Esc] Disable highlights' })
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
