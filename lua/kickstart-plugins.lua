@@ -46,7 +46,7 @@ return {
     -- require 'kickstart.plugins.indent_line',
     -- require 'kickstart.plugins.lint',
     require 'kickstart.plugins.autopairs',
-    -- require 'kickstart.plugins.neo-tree',
+    require 'kickstart.plugins.neo-tree',
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
     --    This is the easiest way to modularize your config.
@@ -56,5 +56,7 @@ return {
     -- { import = 'custom.plugins' },
     -- CUSTOM Load non-kickstart plugins individually.
     require 'custom.plugins.multicursor',
+    require 'custom.plugins.diffview',
+    require 'custom.plugins.neogit',
   },
 }
