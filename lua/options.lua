@@ -25,7 +25,13 @@ end
 -- CUSTOM options start
 -- Langmap Finnish keyboard layout (No dead keys) to have English
 -- special character layout in normal mode
-vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,<>;[]'
+-- vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,'
+vim.opt.langmap = "§½¤&/()=;`~$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖ*ä;\\;:\\\\',\\;:-_;<>/?,"
+-- Keymap fixes for when langmap is not enough
+vim.keymap.set('', 'å', '[', { remap = true, nowait = true })
+vim.keymap.set('', '¨', ']', { remap = true, nowait = true })
+vim.keymap.set('', 'ö', ';', { remap = true, nowait = true })
+vim.keymap.set('', 'Ä', '"', { remap = true, nowait = true })
 
 -- Windows specific options
 if vim.loop.os_uname().sysname:lower():find 'windows' ~= nil then
@@ -37,7 +43,7 @@ if vim.loop.os_uname().sysname:lower():find 'windows' ~= nil then
 end
 
 -- Default indentation options
-vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true

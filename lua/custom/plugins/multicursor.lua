@@ -64,12 +64,13 @@ return {
       -- Clone every cursor and disable the originals.
       set({ 'n', 'v' }, '<leader><c-q>', mc.duplicateCursors, { desc = 'Multicursor: [C-Q] duplicate current' })
 
-      set('n', '<esc>', function()
+      set('n', '<Esc>', function()
         if not mc.cursorsEnabled() then
           mc.enableCursors()
         elseif mc.hasCursors() then
           mc.clearCursors()
         else
+          -- regular esc functionality
           vim.cmd 'nohlsearch'
         end
       end)
@@ -81,7 +82,7 @@ return {
       set('n', '<leader>a', mc.alignCursors, { desc = 'Multicursor: [A]lign' })
 
       -- Split visual selections by regex.
-      set('v', 'S', mc.splitCursors)
+      set('v', 'cs', mc.splitCursors)
 
       -- Append/insert for each line of visual selections.
       set('v', 'I', mc.insertVisual)

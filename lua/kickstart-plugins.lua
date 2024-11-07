@@ -58,5 +58,6 @@ return {
     require 'custom.plugins.multicursor',
     require 'custom.plugins.diffview',
     require 'custom.plugins.neogit',
+    require 'custom.plugins.flash',
   },
 }
