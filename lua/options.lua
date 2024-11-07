@@ -25,7 +25,13 @@ end
 -- CUSTOM options start
 -- Langmap Finnish keyboard layout (No dead keys) to have English
 -- special character layout in normal mode
-vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,<>;[]'
+-- vim.opt.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,'
+vim.opt.langmap = "§½¤&/()=;`~$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖ*ä;\\;:\\\\',\\;:-_;<>/?,"
+-- Keymap fixes for when langmap is not enough
+vim.keymap.set('', 'å', '[', { remap = true, nowait = true })
+vim.keymap.set('', '¨', ']', { remap = true, nowait = true })
+vim.keymap.set('', 'ö', ';', { remap = true, nowait = true })
+vim.keymap.set('', 'Ä', '"', { remap = true, nowait = true })
 
 -- Windows specific options
 if vim.loop.os_uname().sysname:lower():find 'windows' ~= nil then
@@ -37,7 +43,7 @@ if vim.loop.os_uname().sysname:lower():find 'windows' ~= nil then
 end
 
 -- Default indentation options
-vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
@@ -50,9 +56,9 @@ vim.opt.mouse = 'a'
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+-- vim.schedule(function()
+--   vim.opt.clipboard = 'unnamedplus'
+-- end)
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
