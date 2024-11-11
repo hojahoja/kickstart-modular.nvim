@@ -27,9 +27,9 @@ vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
 vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = 'Change working directory to current file location' })
 
 -- Pastries
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y') -- [Y]ank to system clipboard
-vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p') -- [P]aste from system clipboard
-vim.keymap.set('x', '<leader>P', [["_dP]]) -- Don't replace register when pasting in Visual mode
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' }) --
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = '[P]aste from system clipboard' })
+vim.keymap.set('x', '<leader>P', [["_dP]], { desc = '[P]reserve registry when pasting over' }) -- Don't replace register when pasting in Visual mode
 
 -- Langremap macro fixes
 vim.keymap.set('n', '<leader>@', function()
