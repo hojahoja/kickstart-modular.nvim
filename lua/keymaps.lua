@@ -26,6 +26,12 @@ vim.keymap.set('n', 'Q', '@q') -- Q to replay macro
 vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
 vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = 'Change working directory to current file location' })
 
+-- Tab navigation
+vim.keymap.set('n', 'H', 'gT')
+vim.keymap.set('n', 'L', 'gt')
+vim.keymap.set('n', '<Leader>tn', '<cmd>:tabnew<CR>', { desc = '[N]ew Tab' })
+vim.keymap.set('n', '<Leader>tc', '<cmd>:tabclose<CR>', { desc = '[C]lose Tab' })
+
 -- Pastries
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' }) --
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = '[P]aste from system clipboard' })
