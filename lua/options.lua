@@ -34,12 +34,19 @@ vim.keymap.set('', 'ö', ';', { remap = true, nowait = true })
 vim.keymap.set('', 'Ä', '"', { remap = true, nowait = true })
 
 -- Windows specific options
-if vim.loop.os_uname().sysname:lower():find 'windows' ~= nil then
+if vim.uv.os_uname().sysname:lower():find 'windows' ~= nil then
   -- Make vim use english
   vim.opt.langmenu = 'en_US'
   vim.api.nvim_exec2('lan mes en_US', {})
-  -- Set default terminal tool to Powershell 7
-  vim.opt.shell = 'pwsh'
+  -- Configures powershell support shell-powershell. Uses PowerShell7 if available
+  -- help: shell-powershell
+  vim.o.shell = vim.fn.executable 'pwsh' and 'pwsh' or 'powershell'
+  vim.o.shellcmdflag =
+    "-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
+  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+  vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+  vim.opt.shellquote = ''
+  vim.opt.shellxquote = ''
 end
 
 -- Default indentation options
