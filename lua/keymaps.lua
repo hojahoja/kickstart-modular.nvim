@@ -1,6 +1,6 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
--- CUSTOM keymaps start
+-- CUSTOM KEYMAPS start
 -- Conditional keymaps depending on whether nvim is running inside vscode
 if not vim.g.vscode then
   vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Better scrolling
@@ -12,6 +12,8 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 end
 
+-- CUSTOM FUNCTIONS
+
 -- Run the selected command with langremap enabled
 local function langremap_toggled_cmd(command)
   vim.opt.langremap = true
@@ -19,10 +21,21 @@ local function langremap_toggled_cmd(command)
   vim.opt.langremap = false
 end
 
--- Regular CUSTOM keymaps
+-- Langremap macro fixes
+local function map_macrofix(mode, mapping, action)
+  vim.keymap.set(mode, mapping, function()
+    langremap_toggled_cmd(vim.v.count .. action)
+  end, { noremap = true, silent = true, desc = 'Run previous macro with langremap' })
+end
+-- CUSTOM FUNCTIONS END
+
+map_macrofix('n', '<leader>@', '@@') -- langremap toggled @@
+map_macrofix('n', 'Q', '@q') -- Q to replay macro
+
+-- Regular CUSTOM KEYMAPS
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visual mode', silent = true })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in visual mode', silent = true })
-vim.keymap.set('n', 'Q', '@q') -- Q to replay macro
+-- vim.keymap.set('n', 'Q', '@q') -- map_macrofix version in use
 vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
 vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = 'Change working directory to current file location' })
 
@@ -36,16 +49,7 @@ vim.keymap.set('n', '<Leader>tc', '<cmd>:tabclose<CR>', { desc = '[C]lose Tab' }
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' }) --
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = '[P]aste from system clipboard' })
 vim.keymap.set('x', '<leader>P', [["_dP]], { desc = '[P]reserve registry when pasting over' }) -- Don't replace register when pasting in Visual mode
-
--- Langremap macro fixes
-vim.keymap.set('n', '<leader>@', function()
-  langremap_toggled_cmd '@@'
-end, { noremap = true, silent = true, desc = 'Run previous macro with langremap toggled' })
-
-vim.keymap.set('v', '<leader>@', function()
-  langremap_toggled_cmd 'gv@@'
-end, { noremap = true, silent = true, desc = 'Run previous macro with langremap toggled' })
--- CUSTOM keymaps end
+-- CUSTOM KEYMAPS end
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
