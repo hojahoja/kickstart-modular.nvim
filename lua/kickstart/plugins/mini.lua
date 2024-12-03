@@ -30,6 +30,14 @@ return {
         },
       }
 
+      -- CUSTOM additions
+      require('mini.indentscope').setup()
+
+      -- Adds new objects for selection based on indentation level
+      -- - ii - Select [I]nside [I]indentation
+      -- - ai - Select [A]round [I]indentation
+      -- CUSTOM additions end
+
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
