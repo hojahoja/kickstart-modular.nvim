@@ -217,6 +217,7 @@ return {
           settings = {
             basedpyright = {
               analysis = {
+                typeCheckingMode = 'basic',
                 diagnosticSeverityOverrides = {
                   reportImplicitOverride = false,
                 },
