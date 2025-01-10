@@ -46,8 +46,8 @@ vim.keymap.set('n', '<Leader>tn', '<cmd>:tabnew<CR>', { desc = '[N]ew Tab' })
 vim.keymap.set('n', '<Leader>tc', '<cmd>:tabclose<CR>', { desc = '[C]lose Tab' })
 
 -- Pastries
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' }) --
-vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = '[P]aste from system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '""y', { desc = '[Y]ank to system clipboard' }) --
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '""p', { desc = '[P]aste from system clipboard' })
 vim.keymap.set('x', '<leader>P', [["_dP]], { desc = '[P]reserve registry when pasting over' }) -- Don't replace register when pasting in Visual mode
 -- CUSTOM KEYMAPS end
 
