@@ -25,12 +25,36 @@ end
 local function map_macrofix(mode, mapping, action)
   vim.keymap.set(mode, mapping, function()
     langremap_toggled_cmd(vim.v.count .. action)
-  end, { noremap = true, silent = true, desc = 'Run previous macro with langremap' })
+  end, { noremap = true, silent = true })
 end
 -- CUSTOM FUNCTIONS END
 
-map_macrofix('n', '<leader>@', '@@') -- langremap toggled @@
-map_macrofix('n', 'Q', '@q') -- Q to replay macro
+-- Q to replay the q macro while using langremap.
+map_macrofix('n', 'Q', '@q')
+
+-- Restore regular functionalty of macros with pressing leader key first
+vim.keymap.set('n', '<leader>@', '@', { desc = 'Run macro with langremap off' })
+
+-- Make macros run with langremap by default
+vim.keymap.set('n', '@', function()
+  -- Echo the entered command
+  local count = vim.v.count
+  local msg = (count == 0) and '@' or (count .. '@')
+  vim.cmd('echo " ' .. msg .. '"')
+  vim.cmd 'redraw'
+
+  -- Wait for use to input one character and check if it's a valid register or @ with regex
+  local c = vim.fn.nr2char(vim.fn.getchar())
+  if string.find(c, '[a-zA-Z0-9":/.%*%+%-@]') then
+    langremap_toggled_cmd(vim.v.count .. '@' .. c)
+  end
+
+  -- Clear the echoed command
+
+  vim.cmd 'echo " "' -- Stupid fix to make it appear like it was also cleared in vscode.
+  vim.cmd 'echo ""'
+  vim.cmd 'redraw'
+end)
 
 -- Regular CUSTOM KEYMAPS
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visual mode', silent = true })
@@ -46,8 +70,8 @@ vim.keymap.set('n', '<Leader>tn', '<cmd>:tabnew<CR>', { desc = '[N]ew Tab' })
 vim.keymap.set('n', '<Leader>tc', '<cmd>:tabclose<CR>', { desc = '[C]lose Tab' })
 
 -- Pastries
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '""y', { desc = '[Y]ank to system clipboard' }) --
-vim.keymap.set({ 'n', 'v' }, '<leader>p', '""p', { desc = '[P]aste from system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '""y', { desc = '[Y]ank to unnamed register' }) --
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '""p', { desc = '[P]aste from unnamed register' })
 vim.keymap.set('x', '<leader>P', [["_dP]], { desc = '[P]reserve registry when pasting over' }) -- Don't replace register when pasting in Visual mode
 -- CUSTOM KEYMAPS end
 
