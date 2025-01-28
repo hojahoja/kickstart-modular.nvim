@@ -28,6 +28,9 @@ return {
           suffix_last = 'l', -- Suffix to search with "prev" method
           suffix_next = 'n', -- Suffix to search with "next" method
         },
+        custom_surroundings = {
+          ['B'] = { output = { left = '{', right = '}' } },
+        },
       }
 
       -- CUSTOM additions

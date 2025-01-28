@@ -32,7 +32,7 @@ end
 -- Q to replay the q macro while using langremap.
 map_macrofix('n', 'Q', '@q')
 
--- Restore regular functionalty of macros with pressing leader key first
+-- Restore regular functionality of macros with pressing leader key first
 vim.keymap.set('n', '<leader>@', '@', { desc = 'Run macro with langremap off' })
 
 -- Make macros run with langremap by default
@@ -96,6 +96,10 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- CUSTOM Plugin related mappings
+-- Mini surround: [Y]ou [S]urround Line
+vim.keymap.set('n', 'yss', 'ys_', { remap = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
