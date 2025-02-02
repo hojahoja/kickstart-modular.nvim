@@ -1,6 +1,6 @@
-# Kickstart neovim config (based on [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim))
-
+# Kickstart neovim config
 ## Introduction
+Personal neovim config based on [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim).
 
 *This is a fork of [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) that moves from a single file to a multi file configuration.*
 
