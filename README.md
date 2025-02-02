@@ -1,4 +1,4 @@
-# kickstart-modular.nvim
+# Kickstart neovim config (based on [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim))
 
 ## Introduction
 
@@ -12,20 +12,21 @@ A starting point for Neovim that is:
 
 **NOT** a Neovim distribution, but instead a starting point for your configuration.
 
-## Private Fork (mirror)
-
-Instructions based on 
-[this guide](https://gist.github.com/0xjac/85097472043b697ab57ba1b1c7530274).
+## Update (mirror)
+### Add upstream
 ```sh
 git remote add upstream git@github.com:dam9000/kickstart-modular.nvim.git
 ```
+On Windows:
+```pwsh
+git remote add upstream https://github.com/dam9000/kickstart-modular.nvim.git
+```
+Disable pushing just in case.
 ```sh
 git remote set-url --push upstream DISABLE
 ```
-Check your remotes with `git remote -v`
-
-Push to `origin` with `git push origin`.
-When you want to pull changes from `upstream ` you can just fetch the remote and rebase on top of your work.
+Double check remotes with `git remote -v`
+### Fetch and rebase to update
 ```sh
 git fetch upstream
 ```
