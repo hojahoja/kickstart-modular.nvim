@@ -54,6 +54,25 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+
+-- Add syntax highlight support back to files with .tmpl extension.
+-- And other files that have messed up highlighting because off suffix
+-- or prefix changes.
+vim.filetype.add {
+  extension = {
+    tmpl = function(path)
+      if string.find(path, 'zsh') then
+        return 'zsh'
+      elseif string.find(path, 'toml') then
+        return 'toml'
+      elseif string.find(path, 'gitconfig') then
+        return 'gitconfig'
+      end
+      return 'template'
+    end,
+  },
+  filename = { ['dot_zshrc'] = 'zsh' },
+}
 -- CUSTOM options end
 
 -- Enable mouse mode, can be useful for resizing splits for example!
