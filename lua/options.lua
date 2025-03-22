@@ -63,15 +63,23 @@ vim.filetype.add {
     tmpl = function(path)
       if string.find(path, 'zsh') then
         return 'zsh'
+      elseif string.find(path, '.fish') then
+        return 'fish'
       elseif string.find(path, 'toml') then
         return 'toml'
       elseif string.find(path, 'gitconfig') then
         return 'gitconfig'
+      elseif string.find(path, 'tmux') then
+        return 'tmux'
       end
       return 'template'
     end,
   },
-  filename = { ['dot_zshrc'] = 'zsh' },
+  filename = {
+    ['dot_zshrc'] = 'zsh',
+    ['fish_variables'] = 'fish',
+    ['.chezmoiignore'] = 'gitconfig',
+  },
 }
 -- CUSTOM options end
 
