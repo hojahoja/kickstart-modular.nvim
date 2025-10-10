@@ -1,0 +1,22 @@
+return {
+  { -- Snacks Plugins
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      buffdelete = { enabled = true },
+      quickfile = { enabled = true },
+      notifier = { enabled = true },
+    },
+    keys = {
+      {
+        '<leader>vn',
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = '[V]iew [N]otification History',
+      },
+    },
+  },
+}

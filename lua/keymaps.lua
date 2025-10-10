@@ -61,7 +61,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visu
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in visual mode', silent = true })
 -- vim.keymap.set('n', 'Q', '@q') -- map_macrofix version in use
 vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
-vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = 'Change working directory to current file location' })
+vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = '[C]hange working [D]irectory to current file location' })
 
 -- Tab navigation
 vim.keymap.set('n', 'H', 'gT')
@@ -100,6 +100,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- CUSTOM Plugin related mappings
 -- Mini surround: [Y]ou [S]urround Line
 vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+
+-- WhichKey: More intuitive shortcut for whichkey spell checking.
+vim.keymap.set('n', '<leader>cs', '<cmd>:WhichKey<CR>z=', { desc = '[C]hange [S]pelling' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
