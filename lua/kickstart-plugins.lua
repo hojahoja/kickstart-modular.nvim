@@ -69,5 +69,6 @@ return {
     require 'custom.plugins.neogit',
     require 'custom.plugins.flash',
     require 'custom.plugins.snacks',
+    require 'custom.plugins.render-markdown',
   },
 }

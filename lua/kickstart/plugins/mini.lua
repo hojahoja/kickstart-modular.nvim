@@ -1,6 +1,6 @@
 return {
   { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
+    'nvim-mini/mini.nvim',
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -33,16 +33,19 @@ return {
         },
       }
 
-      -- CUSTOM additions
       require('mini.indentscope').setup()
 
       -- Adds new objects for selection based on indentation level
       -- - ii - Select [I]nside [I]indentation
       -- - ai - Select [A]round [I]indentation
-      -- CUSTOM additions end
 
-      -- Do not load statusline plugin if running inside vscode.
+      -- Do not load these mini plugins if running inside vscode.
       if not vim.g.vscode then
+        -- Download the mini icon suite that some plugins depend on.
+        -- Replace nvim_web_devicons with mini icons.
+        require('mini.icons').setup()
+        MiniIcons.mock_nvim_web_devicons()
+
         -- Simple and easy statusline.
         --  You could remove this setup call if you don't like it,
         --  and try some other statusline plugin
@@ -60,7 +63,7 @@ return {
       end
 
       -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      --  Check out: https://github.com/nvim-mini/mini.nvim
     end,
   },
 }
