@@ -74,13 +74,13 @@ if not vim.g.vscode then
   vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {})
 
   -- Toggle terminal in normal mode
-  vim.keymap.set({ 'n' }, '<leader>tt', toggle_terminal, { desc = '[T]oggle floating [T]erminal' })
+  vim.keymap.set({ 'n', 't' }, '<M-\\>', toggle_terminal, { desc = '[T]oggle floating [T]erminal' })
 
   -- jk Quickly Hides floating terminal when inside terminal mode
-  vim.keymap.set('t', 'jk', function()
-    if vim.api.nvim_win_is_valid(state.floating.win) then
-      vim.api.nvim_win_hide(state.floating.win)
-    end
-  end)
+  -- vim.keymap.set('t', 'jk', function()
+  --   if vim.api.nvim_win_is_valid(state.floating.win) then
+  --     vim.api.nvim_win_hide(state.floating.win)
+  --   end
+  -- end)
 end
 -- vim: ts=2 sts=2 sw=2 et

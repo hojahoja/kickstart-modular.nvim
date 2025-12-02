@@ -25,13 +25,25 @@ end
 -- CUSTOM options start
 -- Langmap Finnish keyboard layout (No dead keys) to have English
 -- special character layout in normal mode
--- vim.o.langmap = '§½\\"¤&/()=;`~@$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖäÄ*;\\;:\'\\"\\|,\\;:-_;<>/?,'
-vim.o.langmap = "§½¤&/()=;`~$^&*(),+?´`;-_=+,åÅ¨^;[{]},öÖ*ä;\\;:\\\\',\\;:-_;<>/?,"
--- Keymap fixes for when langmap is not enough
-vim.keymap.set('', 'å', '[', { remap = true, nowait = true })
-vim.keymap.set('', '¨', ']', { remap = true, nowait = true })
-vim.keymap.set('', 'ö', ';', { remap = true, nowait = true })
-vim.keymap.set('', 'Ä', '"', { remap = true, nowait = true })
+-- Only ASCII characters in langmap
+vim.o.langmap = '\\"&/()=;@^&*(),+?´`;-_=+,^\'*;}\\\\|,\\;:-_;<>/?'
+-- Langmap doesn't work with multibyte characters so it's best to set them with regular map.
+local fixes = {
+  ['§'] = '`',
+  ['½'] = '~',
+  ['¤'] = '$',
+  ['å'] = '[',
+  ['Å'] = '{',
+  ['¨'] = ']',
+  ['ö'] = ';',
+  ['Ö'] = ':',
+  ['ä'] = "'",
+  ['Ä'] = '"',
+}
+
+for from, to in pairs(fixes) do
+  vim.keymap.set('n', from, to, { nowait = true })
+end
 
 -- Windows specific options
 if vim.uv.os_uname().sysname:lower():find 'windows' ~= nil then

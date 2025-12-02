@@ -12,55 +12,10 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 end
 
--- CUSTOM FUNCTIONS
-
--- Run the selected command with langremap enabled
-local function langremap_toggled_cmd(command)
-  vim.opt.langremap = true
-  vim.cmd('normal!' .. command)
-  vim.opt.langremap = false
-end
-
--- Langremap macro fixes
-local function map_macrofix(mode, mapping, action)
-  vim.keymap.set(mode, mapping, function()
-    langremap_toggled_cmd(vim.v.count .. action)
-  end, { noremap = true, silent = true })
-end
--- CUSTOM FUNCTIONS END
-
--- Q to replay the q macro while using langremap.
-map_macrofix('n', 'Q', '@q')
-
--- Restore regular functionality of macros with pressing leader key first
-vim.keymap.set('n', '<leader>@', '@', { desc = 'Run macro with langremap off' })
-
--- Make macros run with langremap by default
-vim.keymap.set('n', '@', function()
-  -- Echo the entered command
-  local count = vim.v.count
-  local msg = (count == 0) and '@' or (count .. '@')
-  vim.cmd('echo " ' .. msg .. '"')
-  vim.cmd 'redraw'
-
-  -- Wait for use to input one character and check if it's a valid register or @ with regex
-  local c = vim.fn.nr2char(vim.fn.getchar())
-  if string.find(c, '[a-zA-Z0-9":/.%*%+%-@]') then
-    langremap_toggled_cmd(vim.v.count .. '@' .. c)
-  end
-
-  -- Clear the echoed command
-
-  vim.cmd 'echo " "' -- Stupid fix to make it appear like it was also cleared in vscode.
-  vim.cmd 'echo ""'
-  vim.cmd 'redraw'
-end)
-
 -- Regular CUSTOM KEYMAPS
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection up in visual mode', silent = true })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection down in visual mode', silent = true })
--- vim.keymap.set('n', 'Q', '@q') -- map_macrofix version in use
-vim.keymap.set('i', 'jk', '<Esc>') -- Quick escape from insert mode
+vim.keymap.set('n', 'Q', '@q') -- Shortcut for macro in Q register
 vim.keymap.set('n', '<leader>cd', '<cmd>:cd %:p:h<CR>', { desc = '[C]hange working [D]irectory to current file location' })
 
 -- Tab navigation
@@ -117,5 +72,50 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+-- Below: Old section for langmap fixes saved here if needed later
+
+-- -- CUSTOM FUNCTIONS
+--
+-- -- Run the selected command with langremap enabled
+-- local function langremap_toggled_cmd(command)
+--   vim.opt.langremap = true
+--   vim.cmd('normal!' .. command)
+--   vim.opt.langremap = false
+-- end
+--
+-- -- Langremap macro fixes
+-- local function map_macrofix(mode, mapping, action)
+--   vim.keymap.set(mode, mapping, function()
+--     langremap_toggled_cmd(vim.v.count .. action)
+--   end, { noremap = true, silent = true })
+-- end
+-- -- CUSTOM FUNCTIONS END
+--
+-- -- Q to replay the q macro while using langremap.
+-- map_macrofix('n', 'Q', '@q')
+--
+-- -- Restore regular functionality of macros with pressing leader key first
+-- vim.keymap.set('n', '<leader>@', '@', { desc = 'Run macro with langremap off' })
+--
+-- -- Make macros run with langremap by default
+-- vim.keymap.set('n', '@', function()
+--   -- Echo the entered command
+--   local count = vim.v.count
+--   local msg = (count == 0) and '@' or (count .. '@')
+--   vim.cmd('echo " ' .. msg .. '"')
+--   vim.cmd 'redraw'
+--
+--   -- Wait for use to input one character and check if it's a valid register or @ with regex
+--   local c = vim.fn.nr2char(vim.fn.getchar())
+--   if string.find(c, '[a-zA-Z0-9":/.%*%+%-@]') then
+--     langremap_toggled_cmd(vim.v.count .. '@' .. c)
+--   end
+--
+--   -- Clear the echoed command
+--   vim.cmd 'echo " "' -- Stupid fix to make it appear like it was also cleared in vscode.
+--   vim.cmd 'echo ""'
+--   vim.cmd 'redraw'
+-- end)
 
 -- vim: ts=2 sts=2 sw=2 et
