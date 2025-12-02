@@ -42,7 +42,7 @@ local fixes = {
 }
 
 for from, to in pairs(fixes) do
-  vim.keymap.set('n', from, to, { nowait = true })
+  vim.keymap.set('n', from, to, { remap = true, nowait = true })
 end
 
 -- Windows specific options
