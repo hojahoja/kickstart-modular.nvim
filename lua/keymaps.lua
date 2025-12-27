@@ -10,6 +10,15 @@ if not vim.g.vscode then
   vim.keymap.set('i', '<C-s>', '<C-o><cmd>:update<CR>') -- Same for Insert
   -- Diagnostic keymaps
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+  -- Set settings I use for writing quick notes. (Turn into a toggle later)
+  vim.keymap.set('n', '<leader>cn', function()
+    vim.o.textwidth = 80
+    vim.o.colorcolumn = '81'
+    vim.o.spell = true
+    vim.cmd 'set fo+=aw'
+    vim.cmd 'echo "notes mode on"'
+  end, { desc = 'Set [N]otes mode on' })
 end
 
 -- Regular CUSTOM KEYMAPS
@@ -72,50 +81,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
-
--- Below: Old section for langmap fixes saved here if needed later
-
--- -- CUSTOM FUNCTIONS
---
--- -- Run the selected command with langremap enabled
--- local function langremap_toggled_cmd(command)
---   vim.opt.langremap = true
---   vim.cmd('normal!' .. command)
---   vim.opt.langremap = false
--- end
---
--- -- Langremap macro fixes
--- local function map_macrofix(mode, mapping, action)
---   vim.keymap.set(mode, mapping, function()
---     langremap_toggled_cmd(vim.v.count .. action)
---   end, { noremap = true, silent = true })
--- end
--- -- CUSTOM FUNCTIONS END
---
--- -- Q to replay the q macro while using langremap.
--- map_macrofix('n', 'Q', '@q')
---
--- -- Restore regular functionality of macros with pressing leader key first
--- vim.keymap.set('n', '<leader>@', '@', { desc = 'Run macro with langremap off' })
---
--- -- Make macros run with langremap by default
--- vim.keymap.set('n', '@', function()
---   -- Echo the entered command
---   local count = vim.v.count
---   local msg = (count == 0) and '@' or (count .. '@')
---   vim.cmd('echo " ' .. msg .. '"')
---   vim.cmd 'redraw'
---
---   -- Wait for use to input one character and check if it's a valid register or @ with regex
---   local c = vim.fn.nr2char(vim.fn.getchar())
---   if string.find(c, '[a-zA-Z0-9":/.%*%+%-@]') then
---     langremap_toggled_cmd(vim.v.count .. '@' .. c)
---   end
---
---   -- Clear the echoed command
---   vim.cmd 'echo " "' -- Stupid fix to make it appear like it was also cleared in vscode.
---   vim.cmd 'echo ""'
---   vim.cmd 'redraw'
--- end)
 
 -- vim: ts=2 sts=2 sw=2 et
